@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Academic Planner - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #2b5876, #4e4376);
+      color: #f4f4f9;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+    }
+    nav a {
+      color: #ffd700;
+      font-weight: 600;
+      transition: transform 0.3s, color 0.3s;
+    }
+    nav a:hover {
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+    nav a.active {
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 120px 20px 40px;
+    }
+    .glass-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ffd700;
+    }
+    h2 {
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin-top: 10px;
+    }
+    #quote {
+      font-style: italic;
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #f4f4f9;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" id="nav-home">Home</a>
+    <a href="subjects.html" id="nav-subjects">Subjects</a>
+    <a href="todo.html" id="nav-todo">To-Do List</a>
+    <a href="calendar.html" id="nav-calendar">Calendar</a>
+    <a href="timer.html" id="nav-timer">Timer</a>
+  </nav>
+  <div class="container">
+    <section class="glass-box">
+      <h1>Student Academic Planner</h1>
+      <h2>Motivational Quote</h2>
+      <p id="quote"></p>
+    </section>
+  </div>
+  <script>
+    const quotes = [
+      "Believe in yourself and all that you are.",
+      "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "Don’t watch the clock; do what it does. Keep going."
+    ];
+    document.getElementById("quote").innerText = quotes[Math.floor(Math.random() * quotes.length)];
+
+    const pageMap = {
+      'index.html': 'nav-home',
+      'subjects.html': 'nav-subjects',
+      'todo.html': 'nav-todo',
+      'calendar.html': 'nav-calendar',
+      'timer.html': 'nav-timer',
+      '': 'nav-home'
+    };
+    const path = window.location.pathname.split('/').pop();
+    const activeNavId = pageMap[path] || 'nav-home';
+    document.getElementById(activeNavId)?.classList.add('active');
+  </script>
+</body>
+</html>

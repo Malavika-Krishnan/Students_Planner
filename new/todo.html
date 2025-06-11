@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>To-Do List | Student Academic Planner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #2b5876, #4e4376);
+      color: #f4f4f9;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+    }
+    nav a {
+      color: #ffd700;
+      font-weight: 600;
+      transition: transform 0.3s, color 0.3s;
+    }
+    nav a:hover {
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+    nav a.active {
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 700px;
+      margin: 120px auto 40px;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ffd700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .todo-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+    input[type="text"] {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      width: 70%;
+      margin-right: 10px;
+      background: #ffffff;
+      color: #333;
+    }
+    button.add-btn {
+      padding: 12px 20px;
+      border: none;
+      background: #ffd700;
+      color: #000;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button.add-btn:hover {
+      transform: scale(1.05);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 1.5rem;
+    }
+    li {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+    li span {
+      flex: 1;
+    }
+    li button {
+      background: #f08080;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    li button:hover {
+      background-color: #e06666;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" id="nav-home">Home</a>
+    <a href="subjects.html" id="nav-subjects">Subjects</a>
+    <a href="todo.html" id="nav-todo">To-Do List</a>
+    <a href="calendar.html" id="nav-calendar">Calendar</a>
+    <a href="timer.html" id="nav-timer">Timer</a>
+  </nav>
+
+  <div class="container">
+    <h1>To-Do List</h1>
+    <div class="todo-card">
+      <div class="flex flex-wrap justify-center mb-4">
+        <input type="text" id="todo-input" placeholder="Enter a new task" />
+        <button class="add-btn" onclick="addTodo()">Add</button>
+      </div>
+      <ul id="todo-list"></ul>
+    </div>
+  </div>
+
+  <script>
+    function addTodo() {
+      const input = document.getElementById("todo-input");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${text}</span> <button onclick="removeTodo(this)">Remove</button>`;
+      document.getElementById("todo-list").appendChild(li);
+      input.value = "";
+    }
+
+    function removeTodo(button) {
+      const li = button.parentElement;
+      li.remove();
+    }
+
+    const pageMap = {
+      'index.html': 'nav-home',
+      'subjects.html': 'nav-subjects',
+      'todo.html': 'nav-todo',
+      'calendar.html': 'nav-calendar',
+      'timer.html': 'nav-timer',
+      '': 'nav-home'
+    };
+    const path = window.location.pathname.split('/').pop();
+    const activeNavId = pageMap[path] || 'nav-home';
+    document.getElementById(activeNavId)?.classList.add('active');
+  </script>
+</body>
+</html>
