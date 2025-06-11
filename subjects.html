@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Academic Planner - Subjects</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #4e4376, #2b5876);
+      color: #f4f4f9;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+    }
+    nav a {
+      color: #ffd700;
+      font-weight: 600;
+      transition: transform 0.3s, color 0.3s;
+    }
+    nav a:hover {
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+    nav a.active {
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 700px;
+      margin: 120px auto 40px;
+      padding: 20px;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      backdrop-filter: blur(6px);
+    }
+    h1 {
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" id="nav-home">Home</a>
+    <a href="subjects.html" id="nav-subjects">Subjects</a>
+    <a href="todo.html" id="nav-todo">To-Do List</a>
+    <a href="calendar.html" id="nav-calendar">Calendar</a>
+    <a href="timer.html" id="nav-timer">Timer</a>
+  </nav>
+  <div class="container">
+    <h1 class="text-3xl font-bold text-center mb-6">Subjects & Grades</h1>
+    <div id="subjects"></div>
+  </div>
+  <script>
+    const subjects = [
+      { name: "Math", grade: "A" },
+      { name: "Physics", grade: "B+" },
+      { name: "Chemistry", grade: "A-" },
+      { name: "Biology", grade: "B" },
+      { name: "History", grade: "A" }
+    ];
+    const subjectList = document.getElementById("subjects");
+    subjects.forEach(sub => {
+      const div = document.createElement("div");
+      div.className = "glass-card";
+      div.innerHTML = `<span>${sub.name}</span><span>${sub.grade}</span>`;
+      subjectList.appendChild(div);
+    });
+
+    const pageMap = {
+      'index.html': 'nav-home',
+      'subjects.html': 'nav-subjects',
+      'todo.html': 'nav-todo',
+      'calendar.html': 'nav-calendar',
+      'timer.html': 'nav-timer',
+      '': 'nav-home'
+    };
+    const path = window.location.pathname.split('/').pop();
+    const activeNavId = pageMap[path] || 'nav-home';
+    document.getElementById(activeNavId)?.classList.add('active');
+  </script>
+</body>
+</html>
